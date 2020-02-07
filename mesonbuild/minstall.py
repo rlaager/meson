@@ -239,7 +239,8 @@ class Installer:
                                    'a file'.format(to_file))
             if self.should_preserve_existing_file(from_file, to_file):
                 append_to_log(self.lf, '# Preserving old file %s\n' % to_file)
-                print('Preserving existing file %s' % to_file)
+                if not self.options.only_changed:
+                    print('Preserving existing file %s' % to_file)
                 return False
             os.remove(to_file)
         print('Installing %s to %s' % (from_file, outdir))
